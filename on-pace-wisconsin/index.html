@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wisconsin Election-Night Benchmarks</title>
+<meta name="description" content="County benchmarks for Wisconsin's 2026 Governor race, pre-registered before the election, with a slider and a public scorecard.">
+<style>
+:root{--bg:#fff;--wash:#f4f5f7;--ink:#1b1b1b;--ink2:#454a50;--ink3:#5c6168;--rule:#d4d7db;--strong:#1b1b1b;--accent:#1a4480;--d:#1f5fa8;--r:#b3261e;--ok:#1f7a3d;--warn:#fff4d6;--warnfg:#4d3a00;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#14181d;--wash:#1b2128;--ink:#eceff2;--ink2:#bcc4cc;--ink3:#98a2ad;--rule:#333c46;--strong:#eceff2;--accent:#8db6ee;--d:#8bbaf2;--r:#f4a199;--ok:#3fb467;--warn:#3a3000;--warnfg:#f3dd8a;color-scheme:dark}}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:17px/1.6 "Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+.inner{max-width:960px;margin:0 auto;padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;margin:0;font-weight:600;text-wrap:balance}
+h1{font-size:clamp(30px,5vw,42px);line-height:1.1}h2{font-size:24px;line-height:1.2;margin-bottom:10px}h3{font-size:19px;margin:20px 0 6px}
+p{margin:0 0 10px}a{color:var(--accent);text-underline-offset:2px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.mast{background:var(--wash);border-bottom:1px solid var(--rule);padding-block:20px 30px}
+.org{font-size:14px;color:var(--ink2)}.mast h1{margin:18px 0 10px}.lede{max-width:62ch;font-size:19px;line-height:1.5;color:var(--ink2)}
+main{display:flex;flex-direction:column;gap:44px;padding-block:36px 56px}
+section{scroll-margin-top:12px}
+.note{border-left:4px solid var(--rule);padding:2px 0 2px 14px;color:var(--ink2);font-size:16px;max-width:70ch}
+.banner{background:var(--warn);color:var(--warnfg);padding:10px 14px;border-radius:6px;font-size:15px}
+.panel{border:1px solid var(--rule);border-radius:8px;padding:16px 18px;background:var(--wash)}
+.big{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(34px,7vw,54px);line-height:1;font-weight:600}
+.d{color:var(--d)}.r{color:var(--r)}
+input[type=range]{width:100%;accent-color:var(--accent);height:34px}
+.ticks{display:flex;justify-content:space-between;font-size:13px;color:var(--ink3)}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+button,select,input[type=number],input[type=search],textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--rule);border-radius:6px;padding:7px 12px}
+button{cursor:pointer;font-weight:600}button:hover{border-color:var(--accent)}
+label{font-weight:600;font-size:15px}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:8px 0}.row>div{display:flex;flex-direction:column;gap:4px}
+.wrap{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:15px;font-variant-numeric:tabular-nums}
+caption{text-align:left;font-weight:600;padding:6px 0;color:var(--ink2)}
+th,td{padding:6px 10px;border-bottom:1px solid var(--rule);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}thead th{background:var(--wash);border-bottom:2px solid var(--strong);position:sticky;top:0}
+em{font-style:normal;font-size:12px;border:1px solid var(--rule);border-radius:10px;padding:0 6px;color:var(--ink3);margin-left:4px}
+code,pre{font:13px/1.45 ui-monospace,Consolas,monospace}pre{background:var(--wash);border:1px solid var(--rule);padding:10px;overflow-x:auto;border-radius:6px;margin:8px 0}
+.result{min-height:3em}.ok{color:var(--ok);font-weight:600}.bad{color:var(--r);font-weight:600}
+.sr{position:absolute;left:-9999px}
+#vres,#fres,code{overflow-wrap:anywhere}
+input[type=file]{max-width:100%}
+dl{display:grid;grid-template-columns:max-content 1fr;gap:4px 18px;margin:8px 0}dt{color:var(--ink3)}dd{margin:0}
+footer{border-top:1px solid var(--rule);background:var(--wash);padding-block:24px 36px;font-size:14px;color:var(--ink2)}
+@media (max-width:640px){body{font-size:16.5px}dl{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="mast"><div class="inner">
+<div class="org"><a href="../">Carroll University, Department of Computer Science &middot; Research projects</a></div>
+<h1>Wisconsin election-night benchmarks</h1>
+<p class="lede">What final margin would each of Wisconsin's 72 counties need to show for the 2026 Governor race to be tied, or D+3, or R+3 statewide? Set any statewide margin below and read off every county. The numbers were frozen and hashed before the election, and will be scored against certified results.</p>
+</div></header>
+<main class="inner">
+
+<p class="banner"><strong>Not a forecast.</strong> A benchmark says what a county would need to show for a given statewide result. It does not say who will win. Public release: Sunday, November 1, 2026, 6 PM Central.</p>
+
+<section id="slider" aria-labelledby="slh">
+<h2 id="slh">Set the statewide margin</h2>
+<div class="panel">
+<div class="ticks" aria-hidden="true"><span>R+10</span><span>EVEN</span><span>D+10</span></div>
+<label for="sl" class="sr">Statewide two-party margin, in points</label>
+<input id="sl" type="range" min="-100" max="100" step="1" value="0" aria-describedby="sval">
+<p>Statewide two-party margin: <span id="sval" class="big" aria-live="polite">EVEN</span></p>
+<div class="presets" role="group" aria-label="Preset statewide margins">
+<button type="button" data-s="-3">R+3</button><button type="button" data-s="0">Tied</button><button type="button" data-s="3">D+3</button>
+</div>
+<p id="chk" class="note" style="margin-top:12px"></p>
+</div>
+
+<h3>How far is a county from its benchmark?</h3>
+<div class="row">
+<div><label for="cs">County</label><select id="cs"></select></div>
+<div><label for="cp">Leading party</label><select id="cp"><option value="D">Democratic</option><option value="R">Republican</option></select></div>
+<div><label for="cv">Margin shown (points)</label><input id="cv" type="number" step="0.1" min="0" value="0"></div>
+</div>
+<p id="gres" class="result" role="status" aria-live="polite"></p>
+
+<div class="row"><div><label for="q">Find a county</label><input id="q" type="search" placeholder="Type a county name"></div></div>
+<div class="wrap"><table><caption>Benchmark for each county at the statewide margin set above, largest vote pools first</caption>
+<thead><tr><th scope="col">County</th><th scope="col">Share of state vote</th><th scope="col">Benchmark</th><th scope="col">Typical range</th><th scope="col">Typical deviation</th></tr></thead>
+<tbody id="tb"><tr><th scope="row">Milwaukee</th><td>13.6%</td><td class="d">D+41.0</td><td>D+37.3 to D+44.7</td><td>&plusmn;3.7</td></tr><tr><th scope="row">Dane</th><td>11.3%</td><td class="d">D+53.8</td><td>D+49.7 to D+57.9</td><td>&plusmn;4.1</td></tr><tr><th scope="row">Waukesha</th><td>8.4%</td><td class="r">R+19.6</td><td>R+25.9 to R+13.2</td><td>&plusmn;6.3 <em>less predictable</em></td></tr><tr><th scope="row">Brown</th><td>4.3%</td><td class="r">R+7.5</td><td>R+10.0 to R+5.1</td><td>&plusmn;2.4</td></tr><tr><th scope="row">Outagamie</th><td>3.2%</td><td class="r">R+10.3</td><td>R+12.2 to R+8.3</td><td>&plusmn;1.9</td></tr><tr><th scope="row">Racine</th><td>3.1%</td><td class="r">R+6.9</td><td>R+8.9 to R+4.9</td><td>&plusmn;2.0</td></tr><tr><th scope="row">Winnebago</th><td>2.8%</td><td class="r">R+4.5</td><td>R+6.9 to R+2.1</td><td>&plusmn;2.4</td></tr><tr><th scope="row">Washington</th><td>2.7%</td><td class="r">R+37.0</td><td>R+40.7 to R+33.4</td><td>&plusmn;3.7</td></tr><tr><th scope="row">Kenosha</th><td>2.5%</td><td class="r">R+6.9</td><td>R+9.7 to R+4.1</td><td>&plusmn;2.8</td></tr><tr><th scope="row">Rock</th><td>2.5%</td><td class="d">D+8.2</td><td>D+4.6 to D+11.8</td><td>&plusmn;3.6</td></tr><tr><th scope="row">Marathon</th><td>2.3%</td><td class="r">R+19.1</td><td>R+22.1 to R+16.2</td><td>&plusmn;3.0</td></tr><tr><th scope="row">La Crosse</th><td>2.1%</td><td class="d">D+10.4</td><td>D+8.8 to D+12.1</td><td>&plusmn;1.7</td></tr><tr><th scope="row">Sheboygan</th><td>2.0%</td><td class="r">R+16.7</td><td>R+19.6 to R+13.9</td><td>&plusmn;2.9</td></tr><tr><th scope="row">Ozaukee</th><td>2.0%</td><td class="r">R+9.9</td><td>R+17.4 to R+2.4</td><td>&plusmn;7.5 <em>less predictable</em></td></tr><tr><th scope="row">Eau Claire</th><td>1.8%</td><td class="d">D+11.6</td><td>D+9.7 to D+13.4</td><td>&plusmn;1.9</td></tr><tr><th scope="row">Fond du Lac</th><td>1.7%</td><td class="r">R+29.7</td><td>R+32.8 to R+26.7</td><td>&plusmn;3.1</td></tr><tr><th scope="row">Walworth</th><td>1.7%</td><td class="r">R+22.4</td><td>R+24.0 to R+20.9</td><td>&plusmn;1.5</td></tr><tr><th scope="row">St. Croix</th><td>1.6%</td><td class="r">R+20.0</td><td>R+22.1 to R+18.0</td><td>&plusmn;2.1</td></tr><tr><th scope="row">Dodge</th><td>1.4%</td><td class="r">R+34.4</td><td>R+37.7 to R+31.1</td><td>&plusmn;3.3</td></tr><tr><th scope="row">Jefferson</th><td>1.4%</td><td class="r">R+16.4</td><td>R+17.6 to R+15.3</td><td>&plusmn;1.2</td></tr><tr><th scope="row">Manitowoc</th><td>1.3%</td><td class="r">R+24.3</td><td>R+27.3 to R+21.4</td><td>&plusmn;2.9</td></tr><tr><th scope="row">Portage</th><td>1.3%</td><td class="d">D+2.1</td><td>D+0.2 to D+4.0</td><td>&plusmn;1.9</td></tr><tr><th scope="row">Wood</th><td>1.2%</td><td class="r">R+19.9</td><td>R+23.9 to R+15.9</td><td>&plusmn;4.0</td></tr><tr><th scope="row">Sauk</th><td>1.1%</td><td class="r">R+1.4</td><td>R+5.2 to D+2.4</td><td>&plusmn;3.8</td></tr><tr><th scope="row">Chippewa</th><td>1.1%</td><td class="r">R+23.6</td><td>R+28.6 to R+18.7</td><td>&plusmn;4.9</td></tr><tr><th scope="row">Columbia</th><td>1.0%</td><td class="r">R+3.9</td><td>R+8.2 to D+0.3</td><td>&plusmn;4.2</td></tr><tr><th scope="row">Calumet</th><td>0.9%</td><td class="r">R+21.1</td><td>R+24.2 to R+18.0</td><td>&plusmn;3.1</td></tr><tr><th scope="row">Waupaca</th><td>0.9%</td><td class="r">R+34.6</td><td>R+39.0 to R+30.2</td><td>&plusmn;4.4</td></tr><tr><th scope="row">Oneida</th><td>0.8%</td><td class="r">R+17.0</td><td>R+20.7 to R+13.2</td><td>&plusmn;3.7</td></tr><tr><th scope="row">Grant</th><td>0.7%</td><td class="r">R+18.2</td><td>R+24.4 to R+12.0</td><td>&plusmn;6.2 <em>less predictable</em></td></tr><tr><th scope="row">Polk</th><td>0.7%</td><td class="r">R+31.6</td><td>R+38.3 to R+24.9</td><td>&plusmn;6.7 <em>less predictable</em></td></tr><tr><th scope="row">Barron</th><td>0.7%</td><td class="r">R+31.2</td><td>R+37.1 to R+25.3</td><td>&plusmn;5.9 <em>less predictable</em></td></tr><tr><th scope="row">Oconto</th><td>0.7%</td><td class="r">R+44.7</td><td>R+51.5 to R+37.8</td><td>&plusmn;6.9 <em>less predictable</em></td></tr><tr><th scope="row">Douglas</th><td>0.7%</td><td class="d">D+5.7</td><td>R+2.9 to D+14.3</td><td>&plusmn;8.6 <em>less predictable</em></td></tr><tr><th scope="row">Dunn</th><td>0.7%</td><td class="r">R+16.6</td><td>R+21.3 to R+11.9</td><td>&plusmn;4.7</td></tr><tr><th scope="row">Marinette</th><td>0.7%</td><td class="r">R+39.0</td><td>R+46.6 to R+31.3</td><td>&plusmn;7.7 <em>less predictable</em></td></tr><tr><th scope="row">Shawano</th><td>0.7%</td><td class="r">R+37.5</td><td>R+42.6 to R+32.3</td><td>&plusmn;5.2 <em>less predictable</em></td></tr><tr><th scope="row">Pierce</th><td>0.7%</td><td class="r">R+18.2</td><td>R+24.0 to R+12.4</td><td>&plusmn;5.8 <em>less predictable</em></td></tr><tr><th scope="row">Green</th><td>0.7%</td><td class="d">D+1.3</td><td>R+3.1 to D+5.6</td><td>&plusmn;4.3</td></tr><tr><th scope="row">Door</th><td>0.6%</td><td class="d">D+2.2</td><td>R+0.6 to D+4.9</td><td>&plusmn;2.7</td></tr><tr><th scope="row">Monroe</th><td>0.6%</td><td class="r">R+26.9</td><td>R+33.0 to R+20.8</td><td>&plusmn;6.1 <em>less predictable</em></td></tr><tr><th scope="row">Lincoln</th><td>0.5%</td><td class="r">R+25.8</td><td>R+31.4 to R+20.3</td><td>&plusmn;5.5 <em>less predictable</em></td></tr><tr><th scope="row">Vernon</th><td>0.5%</td><td class="r">R+7.3</td><td>R+12.2 to R+2.3</td><td>&plusmn;5.0</td></tr><tr><th scope="row">Vilas</th><td>0.5%</td><td class="r">R+23.4</td><td>R+27.1 to R+19.7</td><td>&plusmn;3.7</td></tr><tr><th scope="row">Trempealeau</th><td>0.5%</td><td class="r">R+21.8</td><td>R+27.7 to R+15.8</td><td>&plusmn;5.9 <em>less predictable</em></td></tr><tr><th scope="row">Clark</th><td>0.4%</td><td class="r">R+40.2</td><td>R+45.4 to R+35.0</td><td>&plusmn;5.2 <em>less predictable</em></td></tr><tr><th scope="row">Iowa</th><td>0.4%</td><td class="d">D+8.4</td><td>D+4.7 to D+12.1</td><td>&plusmn;3.7</td></tr><tr><th scope="row">Waushara</th><td>0.4%</td><td class="r">R+36.8</td><td>R+43.0 to R+30.6</td><td>&plusmn;6.2 <em>less predictable</em></td></tr><tr><th scope="row">Juneau</th><td>0.4%</td><td class="r">R+32.9</td><td>R+42.6 to R+23.2</td><td>&plusmn;9.7 <em>less predictable</em></td></tr><tr><th scope="row">Kewaunee</th><td>0.4%</td><td class="r">R+34.6</td><td>R+40.0 to R+29.2</td><td>&plusmn;5.4 <em>less predictable</em></td></tr><tr><th scope="row">Adams</th><td>0.4%</td><td class="r">R+27.3</td><td>R+36.0 to R+18.5</td><td>&plusmn;8.8 <em>less predictable</em></td></tr><tr><th scope="row">Bayfield</th><td>0.3%</td><td class="d">D+11.5</td><td>D+4.3 to D+18.7</td><td>&plusmn;7.2 <em>less predictable</em></td></tr><tr><th scope="row">Langlade</th><td>0.3%</td><td class="r">R+35.7</td><td>R+40.3 to R+31.2</td><td>&plusmn;4.6</td></tr><tr><th scope="row">Green Lake</th><td>0.3%</td><td class="r">R+37.1</td><td>R+41.5 to R+32.7</td><td>&plusmn;4.4</td></tr><tr><th scope="row">Taylor</th><td>0.3%</td><td class="r">R+50.3</td><td>R+55.9 to R+44.7</td><td>&plusmn;5.6 <em>less predictable</em></td></tr><tr><th scope="row">Sawyer</th><td>0.3%</td><td class="r">R+16.3</td><td>R+22.2 to R+10.4</td><td>&plusmn;5.9 <em>less predictable</em></td></tr><tr><th scope="row">Washburn</th><td>0.3%</td><td class="r">R+29.5</td><td>R+36.5 to R+22.4</td><td>&plusmn;7.1 <em>less predictable</em></td></tr><tr><th scope="row">Jackson</th><td>0.3%</td><td class="r">R+19.8</td><td>R+26.7 to R+12.9</td><td>&plusmn;6.9 <em>less predictable</em></td></tr><tr><th scope="row">Burnett</th><td>0.3%</td><td class="r">R+31.3</td><td>R+37.3 to R+25.3</td><td>&plusmn;6.0 <em>less predictable</em></td></tr><tr><th scope="row">Marquette</th><td>0.3%</td><td class="r">R+30.6</td><td>R+37.0 to R+24.2</td><td>&plusmn;6.4 <em>less predictable</em></td></tr><tr><th scope="row">Richland</th><td>0.3%</td><td class="r">R+13.5</td><td>R+19.1 to R+7.9</td><td>&plusmn;5.6 <em>less predictable</em></td></tr><tr><th scope="row">Ashland</th><td>0.3%</td><td class="d">D+6.1</td><td>R+3.0 to D+15.2</td><td>&plusmn;9.1 <em>less predictable</em></td></tr><tr><th scope="row">Price</th><td>0.3%</td><td class="r">R+31.3</td><td>R+37.8 to R+24.7</td><td>&plusmn;6.6 <em>less predictable</em></td></tr><tr><th scope="row">Crawford</th><td>0.3%</td><td class="r">R+13.2</td><td>R+20.3 to R+6.2</td><td>&plusmn;7.0 <em>less predictable</em></td></tr><tr><th scope="row">Lafayette</th><td>0.2%</td><td class="r">R+18.7</td><td>R+25.0 to R+12.4</td><td>&plusmn;6.3 <em>less predictable</em></td></tr><tr><th scope="row">Rusk</th><td>0.2%</td><td class="r">R+39.1</td><td>R+47.1 to R+31.1</td><td>&plusmn;8.0 <em>less predictable</em></td></tr><tr><th scope="row">Buffalo</th><td>0.2%</td><td class="r">R+30.3</td><td>R+36.1 to R+24.6</td><td>&plusmn;5.8 <em>less predictable</em></td></tr><tr><th scope="row">Forest</th><td>0.2%</td><td class="r">R+33.6</td><td>R+42.4 to R+24.9</td><td>&plusmn;8.8 <em>less predictable</em></td></tr><tr><th scope="row">Pepin</th><td>0.1%</td><td class="r">R+30.2</td><td>R+37.2 to R+23.2</td><td>&plusmn;7.0 <em>less predictable</em></td></tr><tr><th scope="row">Iron</th><td>0.1%</td><td class="r">R+27.3</td><td>R+30.6 to R+23.9</td><td>&plusmn;3.4</td></tr><tr><th scope="row">Florence</th><td>0.1%</td><td class="r">R+51.5</td><td>R+58.0 to R+44.9</td><td>&plusmn;6.6 <em>less predictable</em></td></tr><tr><th scope="row">Menominee</th><td>0.0%</td><td class="d">D+61.5</td><td>D+55.4 to D+67.5</td><td>&plusmn;6.0 <em>less predictable</em></td></tr></tbody></table></div>
+<p class="note"><strong>Compare complete counts only.</strong> A benchmark describes a place's final margin. Partial counts can mislead, because which ballots are counted first depends on how each municipality organizes its count. The typical deviation is history, not a limit: it is how far each county's final margin landed from its benchmark across nine tests against past elections (the older tests include 2016, which was far wider than recent years).</p>
+</section>
+
+<section id="frozen" aria-labelledby="frh">
+<h2 id="frh">Frozen before the election</h2>
+<p>The method, the county, municipality and district tables, the pass line and the list of public forecasts to compare against were fixed and hashed on 2026-10-30 4:03 PM CDT. Any change after that is published as a dated erratum, never as an edit. The freeze is recorded in the project's version history as commit <code>753cbe55762be22924d7de319aa6f3712893001e</code>.</p>
+<dl>
+<dt>Combined hash</dt><dd><code id="comb">0d4d1fa174e72dfbd7441f642367ab52c7fa80ba6d0ab988be5ea0db7e583e90</code></dd>
+<dt>Pass line</dt><dd>Turnout-weighted mean absolute error of 4.0 points or less across the 72 counties, set by the author before the election.</dd>
+<dt>Model record</dt><dd>1.93 points over the four most recent tests (2022 and 2024); 3.13 over all nine tests back to 2016.</dd>
+<dt>Variant</dt><dd>Swing plus a quarter-weight recent trend, chosen by a rule written before any test was run.</dd>
+</dl>
+<h3>Check it yourself</h3>
+<p>The combined hash is the SHA-256 of these six lines joined by line breaks. Each line is the hash of one frozen file.</p>
+<pre id="lines">40159dbb201c20786efa91e1e618dcbaf1c74337ef45c3c6267853a82ad0fb80  prereg/scorecard_spec.md
+a99a1cdaa6c06b5815a7a0f6b4c9a2d1eeba3a7448c9ad1927ffc335c7749fa5  outputs/tables/benchmarks_governor.csv
+eb52dec0a336b4629d69af1cd42774f716d33fee72585a17cdf8c33dfe0c9411  outputs/tables/municipality_benchmarks.csv
+07cab10a2701f18b941f8e159003b24e034f88b280656059ac47f32ca89cd2ca  outputs/tables/districts_DRAFT_benchmarks.csv
+c1608b97ef6bf2cf18f167c5d812d2cc3f43224df3fa8df6a91d034b0baa581a  outputs/tables/districts_DRAFT_context.csv
+6add426cb65a1b0f7eeb50929f146cb3e5260be027891cbfbec0efa49a0a55df  prereg/forecast_capture.csv</pre>
+<p><button id="vh" type="button">Recompute the combined hash</button> <span id="vres" role="status" aria-live="polite"></span></p>
+<p>The Governor county table is available as <a href="benchmarks_governor.csv" download>benchmarks_governor.csv</a>. Choose it here to hash it in your browser (nothing is uploaded): <input id="vf" type="file" accept=".csv" aria-label="Choose benchmarks_governor.csv to check its hash"> <span id="fres" role="status" aria-live="polite"></span></p>
+<p class="note">This page shows the hash. The date a third party first archived this page (for example the Internet Archive) is a timestamp the author does not control; compare it with the election date.</p>
+</section>
+
+<section id="checks" aria-labelledby="chh">
+<h2 id="chh">How it was checked</h2>
+<ul>
+<li>A second program, written by a separate process that was not shown the first program's code, reproduces 87,170 published numbers: vote counts exactly and everything else to one part in a million. Both followed one written specification, so this catches errors in the code, not in the method.</li>
+<li>A fresh rebuild from the raw files ran 20 steps and 144 tests on 2026-10-30 and changed 0 published files.</li>
+<li>Every county table is cross-footed against the Wisconsin Elections Commission's printed statewide row.</li>
+<li>Source code is not yet public.</li>
+</ul>
+</section>
+
+<section id="score" aria-labelledby="sch">
+<h2 id="sch">Scorecard</h2>
+<p class="panel"><strong>Pending.</strong> After the November 3 election, the scorecard will be published here: the error for every county, the turnout-weighted average against the 4.0-point line, and the public forecasts captured before the freeze (Cook Political Report, Inside Elections, Decision Desk HQ), scored only on what each page printed. It will be published whether it flatters the benchmarks or not. Certified results are expected in late November; any earlier figure will be labelled provisional.</p>
+</section>
+
+<p class="note">Prepared by Dr. Jack Forden, Carroll University. Views expressed are the author&#x27;s own and not those of Carroll University (pending guidance from Carroll&#x27;s media office).</p>
+</main>
+<footer><div class="inner"><p>Project pages are research outputs of individual faculty and students, not official statements of Carroll University.</p></div></footer>
+<script type="application/json" id="data">[{"c":"Milwaukee","s":13.647156,"t":41.038836,"d":3.702949,"f":false},{"c":"Dane","s":11.250836,"t":53.76172,"d":4.090306,"f":false},{"c":"Waukesha","s":8.41511,"t":-19.576053,"d":6.341252,"f":true},{"c":"Brown","s":4.303123,"t":-7.548716,"d":2.435811,"f":false},{"c":"Outagamie","s":3.199717,"t":-10.265522,"d":1.937291,"f":false},{"c":"Racine","s":3.133982,"t":-6.899688,"d":1.959185,"f":false},{"c":"Winnebago","s":2.81425,"t":-4.542301,"d":2.402525,"f":false},{"c":"Washington","s":2.746359,"t":-37.024415,"d":3.667553,"f":false},{"c":"Kenosha","s":2.49876,"t":-6.894589,"d":2.777175,"f":false},{"c":"Rock","s":2.483317,"t":8.198442,"d":3.569253,"f":false},{"c":"Marathon","s":2.32268,"t":-19.141388,"d":2.967805,"f":false},{"c":"La Crosse","s":2.095324,"t":10.421928,"d":1.652881,"f":false},{"c":"Sheboygan","s":2.009193,"t":-16.749783,"d":2.897426,"f":false},{"c":"Ozaukee","s":1.956131,"t":-9.924322,"d":7.51469,"f":true},{"c":"Eau Claire","s":1.816556,"t":11.576822,"d":1.855562,"f":false},{"c":"Fond du Lac","s":1.734731,"t":-29.714038,"d":3.056395,"f":false},{"c":"Walworth","s":1.717306,"t":-22.447833,"d":1.514904,"f":false},{"c":"St. Croix","s":1.601922,"t":-20.037985,"d":2.051946,"f":false},{"c":"Dodge","s":1.449314,"t":-34.353832,"d":3.303123,"f":false},{"c":"Jefferson","s":1.446574,"t":-16.42852,"d":1.153575,"f":false},{"c":"Manitowoc","s":1.345332,"t":-24.321947,"d":2.947526,"f":false},{"c":"Portage","s":1.278245,"t":2.11309,"d":1.911737,"f":false},{"c":"Wood","s":1.239868,"t":-19.89636,"d":4.031492,"f":false},{"c":"Sauk","s":1.087688,"t":-1.437407,"d":3.789528,"f":false},{"c":"Chippewa","s":1.073896,"t":-23.646904,"d":4.941726,"f":false},{"c":"Columbia","s":1.025846,"t":-3.910844,"d":4.245056,"f":false},{"c":"Calumet","s":0.923831,"t":-21.090472,"d":3.082094,"f":false},{"c":"Waupaca","s":0.862871,"t":-34.584153,"d":4.406408,"f":false},{"c":"Oneida","s":0.750394,"t":-16.953805,"d":3.745042,"f":false},{"c":"Grant","s":0.747913,"t":-18.234871,"d":6.2013,"f":true},{"c":"Polk","s":0.744939,"t":-31.56927,"d":6.694483,"f":true},{"c":"Barron","s":0.735792,"t":-31.215361,"d":5.920084,"f":true},{"c":"Oconto","s":0.709579,"t":-44.662319,"d":6.854187,"f":true},{"c":"Douglas","s":0.701594,"t":5.689855,"d":8.610317,"f":true},{"c":"Dunn","s":0.691991,"t":-16.571304,"d":4.687479,"f":false},{"c":"Marinette","s":0.681709,"t":-38.973384,"d":7.662044,"f":true},{"c":"Shawano","s":0.674329,"t":-37.450919,"d":5.180542,"f":true},{"c":"Pierce","s":0.66929,"t":-18.227484,"d":5.811518,"f":true},{"c":"Green","s":0.652037,"t":1.291662,"d":4.348567,"f":false},{"c":"Door","s":0.647452,"t":2.169613,"d":2.749065,"f":false},{"c":"Monroe","s":0.64342,"t":-26.892708,"d":6.070631,"f":true},{"c":"Lincoln","s":0.506131,"t":-25.833082,"d":5.539075,"f":true},{"c":"Vernon","s":0.493483,"t":-7.252332,"d":4.992124,"f":false},{"c":"Vilas","s":0.488066,"t":-23.410199,"d":3.681217,"f":false},{"c":"Trempealeau","s":0.460266,"t":-21.755276,"d":5.923344,"f":true},{"c":"Clark","s":0.438258,"t":-40.2098,"d":5.19065,"f":true},{"c":"Iowa","s":0.431973,"t":8.395688,"d":3.676035,"f":false},{"c":"Waushara","s":0.417738,"t":-36.795848,"d":6.163743,"f":true},{"c":"Juneau","s":0.395541,"t":-32.942519,"d":9.705638,"f":true},{"c":"Kewaunee","s":0.367251,"t":-34.561149,"d":5.399198,"f":true},{"c":"Adams","s":0.364026,"t":-27.271718,"d":8.758723,"f":true},{"c":"Bayfield","s":0.343298,"t":11.492543,"d":7.170541,"f":true},{"c":"Langlade","s":0.338189,"t":-35.736469,"d":4.565007,"f":false},{"c":"Green Lake","s":0.320675,"t":-37.115936,"d":4.381466,"f":false},{"c":"Taylor","s":0.318583,"t":-50.269259,"d":5.614228,"f":true},{"c":"Sawyer","s":0.316884,"t":-16.270927,"d":5.912682,"f":true},{"c":"Washburn","s":0.308135,"t":-29.474071,"d":7.073242,"f":true},{"c":"Jackson","s":0.300487,"t":-19.783241,"d":6.899948,"f":true},{"c":"Burnett","s":0.299331,"t":-31.322671,"d":5.988549,"f":true},{"c":"Marquette","s":0.273948,"t":-30.604034,"d":6.404786,"f":true},{"c":"Richland","s":0.263598,"t":-13.499859,"d":5.623394,"f":true},{"c":"Ashland","s":0.262006,"t":6.106105,"d":9.090921,"f":true},{"c":"Price","s":0.260618,"t":-31.258318,"d":6.55445,"f":true},{"c":"Crawford","s":0.257838,"t":-13.230119,"d":7.037854,"f":true},{"c":"Lafayette","s":0.246977,"t":-18.66616,"d":6.294989,"f":true},{"c":"Rusk","s":0.236178,"t":-39.091928,"d":7.980211,"f":true},{"c":"Buffalo","s":0.227679,"t":-30.313778,"d":5.761287,"f":true},{"c":"Forest","s":0.154193,"t":-33.628208,"d":8.776591,"f":true},{"c":"Pepin","s":0.122089,"t":-30.228771,"d":6.980536,"f":true},{"c":"Iron","s":0.12056,"t":-27.255827,"d":3.380887,"f":false},{"c":"Florence","s":0.090574,"t":-51.459984,"d":6.57357,"f":true},{"c":"Menominee","s":0.045069,"t":61.478548,"d":6.04889,"f":true}]</script>
+<script>
+const D=JSON.parse(document.getElementById('data').textContent);
+const fmt=x=>{const p=Math.round(x*10)/10;return p===0?'EVEN':(p>0?'D+':'R+')+Math.abs(p).toFixed(1)};
+const cls=x=>Math.round(x*10)/10>0?'d':Math.round(x*10)/10<0?'r':'';
+const $=id=>document.getElementById(id);
+function show(S){
+  $('sval').textContent=fmt(S);$('sval').className='big '+cls(S);
+  const q=$('q').value.trim().toLowerCase();
+  let w=0;D.forEach(r=>{w+=r.s*(S+r.t)/100});
+  $('chk').textContent='Vote-weighted average of the 72 benchmarks: '+fmt(w)+' (equals the statewide margin set above).';
+  $('tb').innerHTML=D.filter(r=>r.c.toLowerCase().includes(q)).map(r=>{
+    const b=S+r.t;
+    return '<tr><th scope="row">'+r.c+'</th><td>'+r.s.toFixed(1)+'%</td><td class="'+cls(b)+'">'+fmt(b)+'</td><td>'+fmt(b-r.d)+' to '+fmt(b+r.d)+'</td><td>&plusmn;'+r.d.toFixed(1)+(r.f?' <em>less predictable</em>':'')+'</td></tr>'}).join('');
+  gap();
+}
+function gap(){
+  const S=parseInt($('sl').value,10)/10,r=D.find(x=>x.c===$('cs').value),v=parseFloat($('cv').value);
+  if(!r||isNaN(v)){$('gres').textContent='Pick a county and enter its margin to see the gap.';return}
+  const a=($('cp').value==='D'?1:-1)*Math.abs(v),b=S+r.t,g=a-b;
+  const dir=Math.abs(g)<0.05?'right at':(g>0?Math.abs(g).toFixed(1)+' points more Democratic than':Math.abs(g).toFixed(1)+' points more Republican than');
+  $('gres').innerHTML='<strong>'+r.c+'</strong> shows '+fmt(a)+' against a benchmark of '+fmt(b)+': '+dir+' the benchmark, '+(Math.abs(g)/r.d).toFixed(1)+' typical deviations (&plusmn;'+r.d.toFixed(1)+'). A gap inside one typical deviation is ordinary; compare complete counts only.';
+}
+$('sl').addEventListener('input',()=>show(parseInt($('sl').value,10)/10));
+document.querySelectorAll('[data-s]').forEach(b=>b.addEventListener('click',()=>{$('sl').value=Math.round(parseFloat(b.dataset.s)*10);show(parseFloat(b.dataset.s))}));
+$('q').addEventListener('input',()=>show(parseInt($('sl').value,10)/10));
+['cs','cp','cv'].forEach(i=>$(i).addEventListener('input',gap));
+$('cs').innerHTML=D.slice().sort((a,b)=>a.c.localeCompare(b.c)).map(r=>'<option>'+r.c+'</option>').join('');
+show(0);
+async function sha(buf){if(!window.crypto||!crypto.subtle)throw new Error('This browser blocks hashing on insecure pages; open the https address, or run sha256sum on the file.');const h=await crypto.subtle.digest('SHA-256',buf);return [...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,'0')).join('')}
+$('vh').addEventListener('click',async()=>{try{
+  const t=$('lines').textContent.replace(/\r/g,'').replace(/\n+$/,'');
+  const h=await sha(new TextEncoder().encode(t));const ok=h===$('comb').textContent.trim();
+  $('vres').innerHTML=(ok?'<span class="ok">Match.</span> ':'<span class="bad">No match.</span> ')+'Computed '+h;
+}catch(e){$('vres').textContent=e.message}});
+$('vf').addEventListener('change',async e=>{
+  const f=e.target.files[0];if(!f)return;let h;try{h=await sha(await f.arrayBuffer())}catch(x){$('fres').textContent=x.message;return}
+  const want=$('lines').textContent.split('\n').find(l=>l.endsWith('benchmarks_governor.csv')).split('  ')[0];
+  $('fres').innerHTML=(h===want?'<span class="ok">Match.</span> ':'<span class="bad">No match.</span> ')+'File hash '+h;
+});
+</script>
+</body>
+</html>
