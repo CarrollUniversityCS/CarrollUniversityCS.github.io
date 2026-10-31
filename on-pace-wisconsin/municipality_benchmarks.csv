@@ -1,0 +1,63 @@
+municipality,county,votes_cast_2022_governor,expected_share_of_state_vote_pct,lean_vs_state_points,benchmark_tied_points,benchmark_D+3_points,benchmark_R+3_points,typical_deviation_points,less_predictable,higher_variance_than_counties,selected_because
+City of Milwaukee,Milwaukee,176709,6.685498,59.801557,59.801557,62.801557,56.801557,2.515388,False,True,both
+City of Madison,Dane,142262,5.376050,70.744572,70.744572,73.744572,67.744572,3.275472,False,True,both
+City of Green Bay,Brown,35267,1.323838,9.416990,9.416990,12.416990,6.416990,0.757813,False,True,both
+City of Kenosha,Kenosha,33387,1.255150,13.301537,13.301537,16.301537,10.301537,2.474255,False,True,both
+City of Waukesha,Waukesha,30689,1.154919,-6.413791,-6.413791,-3.413791,-9.413791,1.792827,False,True,both
+City of Eau Claire,Eau Claire,29724,1.111883,25.544641,25.544641,28.544641,22.544641,2.521896,False,True,both
+City of Appleton,Outagamie,26957,1.014134,14.806074,14.806074,17.806074,11.806074,1.179554,False,True,largest25
+City of Wauwatosa,Milwaukee,26570,1.002762,39.164636,39.164636,42.164636,36.164636,3.081050,False,True,both
+City of Janesville,Rock,26082,0.980127,17.812419,17.812419,20.812419,14.812419,4.961237,False,True,largest25
+City of Oshkosh,Winnebago,24425,0.917486,9.644005,9.644005,12.644005,6.644005,1.029242,False,True,largest25
+City of Brookfield,Waukesha,23620,0.890403,-8.491552,-8.491552,-5.491552,-11.491552,5.724689,True,True,both
+City of New Berlin,Waukesha,23273,0.876527,-17.951203,-17.951203,-14.951203,-20.951203,3.679289,False,True,both
+City of West Allis,Milwaukee,22352,0.838830,12.555708,12.555708,15.555708,9.555708,0.635841,False,True,both
+City of La Crosse,La Crosse,21982,0.826426,29.090283,29.090283,32.090283,26.090283,6.355787,True,True,both
+City of Racine,Racine,21968,0.827973,32.724289,32.724289,35.724289,29.724289,1.241873,False,True,both
+Village of Menomonee Falls,Waukesha,21348,0.804770,-9.383199,-9.383199,-6.383199,-12.383199,4.855156,False,True,both
+City of Franklin,Milwaukee,17983,0.677546,-8.948960,-8.948960,-5.948960,-11.948960,1.026193,False,True,both
+City of Sheboygan,Sheboygan,17321,0.650087,8.205268,8.205268,11.205268,5.205268,0.634018,False,True,largest25
+City of Sun Prairie,Dane,17056,0.641661,43.748837,43.748837,46.748837,40.748837,1.713511,False,True,both
+City of Greenfield,Milwaukee,16448,0.618907,5.563087,5.563087,8.563087,2.563087,0.102377,False,True,both
+City of Fond du Lac,Fond du Lac,16331,0.614771,-8.658252,-8.658252,-5.658252,-11.658252,2.129793,False,True,largest25
+City of Oak Creek,Milwaukee,16083,0.605617,-3.903133,-3.903133,-0.903133,-6.903133,0.758850,False,True,both
+City of Mequon,Ozaukee,14954,0.563972,-2.819166,-2.819166,0.180834,-5.819166,3.602732,False,True,largest25
+City of Wausau,Marathon,14780,0.555341,8.244752,8.244752,11.244752,5.244752,1.317850,False,True,largest25
+City of West Bend,Washington,14619,0.551149,-25.780084,-25.780084,-22.780084,-28.780084,1.598101,False,True,largest25
+City of Fitchburg,Dane,14545,0.548578,59.956296,59.956296,62.956296,56.956296,2.574396,False,True,county_over_5000
+City of Muskego,Waukesha,14453,0.543725,-35.111686,-35.111686,-32.111686,-38.111686,3.169225,False,True,county_over_5000
+Village of Mount Pleasant,Racine,13710,0.517008,-2.346624,-2.346624,0.653376,-5.346624,2.547558,False,True,county_over_5000
+Village of Caledonia,Racine,13105,0.494126,-16.099105,-16.099105,-13.099105,-19.099105,1.977103,False,True,county_over_5000
+City of Middleton,Dane,12109,0.456859,61.827742,61.827742,64.827742,58.827742,2.483386,False,True,county_over_5000
+City of De Pere,Brown,11377,0.427928,1.379423,1.379423,4.379423,-1.620577,1.279242,False,True,county_over_5000
+Village of Pleasant Prairie,Kenosha,10282,0.386603,-12.210857,-12.210857,-9.210857,-15.210857,1.273899,False,True,county_over_5000
+City of Oconomowoc,Waukesha,10102,0.380327,-21.697639,-21.697639,-18.697639,-24.697639,1.553091,False,True,county_over_5000
+Village of Howard,Brown,9923,0.372855,-15.666984,-15.666984,-12.666984,-18.666984,0.671950,False,True,county_over_5000
+City of Pewaukee,Waukesha,9255,0.348991,-27.062718,-27.062718,-24.062718,-30.062718,4.881167,False,True,county_over_5000
+City of Onalaska,La Crosse,8932,0.336097,7.471005,7.471005,10.471005,4.471005,1.682727,False,True,county_over_5000
+Village of Whitefish Bay,Milwaukee,8667,0.326984,41.208480,41.208480,44.208480,38.208480,3.470570,False,True,county_over_5000
+Village of Waunakee,Dane,8458,0.318375,27.130263,27.130263,30.130263,24.130263,1.775437,False,True,county_over_5000
+City of South Milwaukee,Milwaukee,8446,0.317747,3.508108,3.508108,6.508108,0.508108,1.253366,False,True,county_over_5000
+Village of Ashwaubenon,Brown,8122,0.305348,-7.171243,-7.171243,-4.171243,-10.171243,0.779835,False,True,county_over_5000
+Village of Shorewood,Milwaukee,7872,0.297861,68.751845,68.751845,71.751845,65.751845,2.089904,False,True,county_over_5000
+City of Verona,Dane,7799,0.293237,49.151264,49.151264,52.151264,46.151264,2.458491,False,True,county_over_5000
+Village of Greendale,Milwaukee,7681,0.289274,3.807530,3.807530,6.807530,0.807530,1.950966,False,True,county_over_5000
+City of Glendale,Milwaukee,7360,0.277482,47.983315,47.983315,50.983315,44.983315,1.871978,False,True,county_over_5000
+City of Cudahy,Milwaukee,7271,0.273670,12.434294,12.434294,15.434294,9.434294,3.250929,False,True,county_over_5000
+Village of Bellevue,Brown,7169,0.269994,-6.768859,-6.768859,-3.768859,-9.768859,4.299574,False,True,county_over_5000
+Village of Suamico,Brown,6959,0.262297,-30.276959,-30.276959,-27.276959,-33.276959,1.632332,False,True,county_over_5000
+City of Stoughton,Dane,6878,0.258524,42.904584,42.904584,45.904584,39.904584,2.336628,False,True,county_over_5000
+Village of Allouez,Brown,6809,0.256173,9.664975,9.664975,12.664975,6.664975,0.518074,False,True,county_over_5000
+Village of Salem Lakes,Kenosha,6468,0.242733,-33.079911,-33.079911,-30.079911,-36.079911,0.995990,False,True,county_over_5000
+Village of Lisbon,Waukesha,6290,0.237427,-38.337835,-38.337835,-35.337835,-41.337835,5.153954,True,True,county_over_5000
+Village of Oregon,Dane,6282,0.236288,41.622651,41.622651,44.622651,38.622651,2.652665,False,True,county_over_5000
+Village of Sussex,Waukesha,6237,0.234884,-22.970960,-22.970960,-19.970960,-25.970960,3.015523,False,True,county_over_5000
+Village of Brown Deer,Milwaukee,5812,0.219244,47.313857,47.313857,50.313857,44.313857,2.955696,False,True,county_over_5000
+Village of DeForest,Dane,5567,0.209312,30.021513,30.021513,33.021513,27.021513,2.490682,False,True,county_over_5000
+Town of Oconomowoc,Waukesha,5362,0.201993,-38.047167,-38.047167,-35.047167,-41.047167,3.221296,False,True,county_over_5000
+City of Monona,Dane,5344,0.201633,65.328051,65.328051,68.328051,62.328051,2.032626,False,True,county_over_5000
+Village of McFarland,Dane,5285,0.199396,43.604158,43.604158,46.604158,40.604158,1.082837,False,True,county_over_5000
+Town of Delafield,Waukesha,5272,0.198885,-32.387592,-32.387592,-29.387592,-35.387592,5.062633,True,True,county_over_5000
+Town of Merton,Waukesha,5226,0.197406,-41.082593,-41.082593,-38.082593,-44.082593,6.912734,True,True,county_over_5000
+Village of Waukesha,Waukesha,5141,0.193861,-32.575396,-32.575396,-29.575396,-35.575396,4.589084,False,True,county_over_5000
+Village of Hartland,Waukesha,5017,0.188856,-23.550244,-23.550244,-20.550244,-26.550244,3.506038,False,True,county_over_5000
