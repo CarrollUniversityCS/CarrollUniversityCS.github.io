@@ -127,6 +127,7 @@ footer p{max-width:none}
 
 <section id="explore" aria-labelledby="ex-h">
 <h2 id="ex-h">Explore the benchmarks</h2>
+<p id="live" class="sr" role="status" aria-live="polite"></p>
 <div class="panel">
 <fieldset class="ctl"><legend>1. What do you want to look at?</legend>
 <div class="seg" role="group" aria-label="Map layer">
@@ -381,14 +382,16 @@ function card(){
   $('gbox').innerHTML=gauge(b,a,r.d);
   $('gcap').textContent='Line: benchmark, '+fmt(b)+'. Triangle: '+r.c+' now, '+fmt(a)+'.';
 }
-function all(){readout();draw();table();picker();card()}
+let liveT=null;
+function announce(){clearTimeout(liveT);liveT=setTimeout(()=>{const S=base(),r=items().find(x=>x.c===st.sel);if(!r)return;$('live').textContent='With the result at '+fmt(S)+', the benchmark for '+r.c+' is '+fmt(S+r.t)+', usual range '+fmt(S+r.t-r.d)+' to '+fmt(S+r.t+r.d)+'.'},500)}
+function all(){readout();draw();table();picker();card();announce()}
 function setLayer(l){st.layer=l;st.sel=null;document.querySelectorAll('[data-layer]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.layer===l));all()}
 document.querySelectorAll('[data-layer]').forEach(b=>b.addEventListener('click',()=>setLayer(b.dataset.layer)));
 document.querySelectorAll('[data-dist]').forEach(b=>b.addEventListener('click',()=>{st.dist=b.dataset.dist;st.sel=null;document.querySelectorAll('[data-dist]').forEach(x=>x.setAttribute('aria-pressed',x===b));all()}));
 ['sl','sd'].forEach(i=>$(i).addEventListener('input',all));
 document.querySelectorAll('[data-s]').forEach(b=>b.addEventListener('click',()=>{const id=st.layer==='districts'?'sd':'sl';$(id).value=Math.round(parseFloat(b.dataset.s)*10);all()}));
 $('q').addEventListener('input',table);
-$('cs').addEventListener('input',()=>{st.sel=$('cs').value;draw();table();card()});
+$('cs').addEventListener('input',()=>{st.sel=$('cs').value;draw();table();card();announce()});
 ['cp','cv'].forEach(i=>$(i).addEventListener('input',card));
 $('map').addEventListener('click',e=>{const n=e.target.dataset&&e.target.dataset.n;if(!n)return;st.sel=n;all()});
 all();
