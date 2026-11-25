@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Patch Watch: how fast do local government websites install security fixes?</title>
+<meta name="description" content="A Carroll University study of how quickly Wisconsin's local and state government websites install a security fix after it is published. Passive, light-touch, and reported only in groups.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap">
+<style>
+:root {
+  --bg: #ffffff;
+  --wash: #f4f5f7;
+  --ink: #1b1b1b;
+  --ink-2: #454a50;
+  --ink-3: #5c6168;
+  --rule: #d4d7db;
+  --rule-strong: #1b1b1b;
+  --accent: #1a4480;
+  --live: #1f7a3d;
+  --warn: #8a5a00;
+  --warn-bg: #fff4c2;
+  --ok-bg: #e3f3e8;
+  --font-display: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
+  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14181d; --wash: #1b2128; --ink: #eceff2; --ink-2: #bcc4cc; --ink-3: #98a2ad;
+    --rule: #333c46; --rule-strong: #eceff2; --accent: #8db6ee; --live: #3fb467;
+    --warn: #ffd98a; --warn-bg: #4a3c10; --ok-bg: #173a24;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14181d; --wash: #1b2128; --ink: #eceff2; --ink-2: #bcc4cc; --ink-3: #98a2ad;
+  --rule: #333c46; --rule-strong: #eceff2; --accent: #8db6ee; --live: #3fb467;
+  --warn: #ffd98a; --warn-bg: #4a3c10; --ok-bg: #173a24;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 18px/1.6 var(--font-body); }
+.wrap { max-width: 880px; margin: 0 auto; padding-inline: 20px; }
+h1, h2, h3 { font-family: var(--font-display); margin: 0; font-weight: 600; text-wrap: balance; }
+h1 { font-size: clamp(34px, 5.4vw, 50px); line-height: 1.1; }
+h2 { font-size: 28px; line-height: 1.2; margin-bottom: 14px; }
+h3 { font-size: 21px; line-height: 1.25; margin-bottom: 6px; }
+p { margin: 0 0 14px; }
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.muted { color: var(--ink-2); }
+.small { font-size: 15px; color: var(--ink-3); }
+
+.masthead { background: var(--wash); border-bottom: 1px solid var(--rule); padding-block: 22px 44px; }
+.crumb { font-size: 15px; }
+.masthead h1 { margin: 26px 0 16px; }
+.lede { max-width: 36em; font-size: 20px; line-height: 1.5; color: var(--ink-2); }
+.pill { display: inline-block; margin-top: 22px; font-size: 14px; font-weight: 600; color: var(--live); }
+.pill::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--live); margin-right: 7px; }
+.cta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 20px; font-weight: 600; font-size: 16px; }
+
+section { padding-block: 44px; border-bottom: 1px solid var(--rule); }
+section:last-of-type { border-bottom: 0; }
+
+.plain { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 8px; }
+.card { border-top: 3px solid var(--rule-strong); padding-top: 14px; }
+.card p { color: var(--ink-2); font-size: 17px; }
+
+figure { margin: 0; }
+svg { display: block; width: 100%; height: auto; }
+svg .panel { fill: var(--wash); stroke: var(--rule); stroke-width: 1.5; }
+svg .box { fill: var(--bg); stroke: var(--rule-strong); stroke-width: 1.5; }
+svg .box-warn { fill: var(--warn-bg); stroke: var(--warn); stroke-width: 1.5; }
+svg .box-ok { fill: var(--ok-bg); stroke: var(--live); stroke-width: 1.5; }
+svg .stroke { stroke: var(--ink-2); stroke-width: 2.5; fill: none; }
+svg .bracket { stroke: var(--warn); stroke-width: 3; fill: none; }
+svg .dot { fill: var(--accent); }
+svg .dot-warn { fill: var(--warn); }
+svg .t { fill: var(--ink); font: 600 15px var(--font-body); }
+svg .t2 { fill: var(--ink-2); font: 500 14px var(--font-body); }
+svg .tw { fill: var(--warn); font: 700 15px var(--font-body); }
+svg .big { fill: var(--ink); font: 700 24px var(--font-body); }
+.figure { border: 1px solid var(--rule); background: var(--wash); padding: 16px; margin-top: 10px; }
+.figure figcaption { font-size: 15px; color: var(--ink-2); margin-top: 10px; }
+
+.steps { list-style: none; padding: 0; margin: 10px 0 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; counter-reset: step; }
+.steps li { position: relative; border-top: 3px solid var(--accent); padding-top: 12px; font-size: 16px; color: var(--ink-2); }
+.steps li strong { display: block; font-family: var(--font-display); font-size: 19px; color: var(--ink); margin-bottom: 6px; }
+.steps li::before { counter-increment: step; content: counter(step); display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--bg); font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 10px; }
+.tile { border: 1px solid var(--rule); padding: 16px; background: var(--wash); }
+.tile p { color: var(--ink-2); font-size: 16px; margin: 0; }
+.tile h3 { font-size: 19px; }
+
+.optout { margin-top: 22px; border: 2px solid var(--rule-strong); padding: 18px 20px; }
+.optout strong { font-family: var(--font-display); font-size: 21px; display: block; margin-bottom: 4px; }
+.optout p { margin: 0; color: var(--ink-2); }
+
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.two ul { margin: 6px 0 0; padding-left: 20px; color: var(--ink-2); }
+.two li { margin-bottom: 8px; }
+.two h3 { font-size: 20px; }
+
+.timeline { list-style: none; padding: 0; margin: 14px 0 0; position: relative; }
+.timeline li { position: relative; padding: 0 0 22px 28px; border-left: 2px solid var(--rule); color: var(--ink-2); }
+.timeline li::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
+.timeline li.now::before { background: var(--accent); }
+.timeline strong { color: var(--ink); display: block; font-family: var(--font-display); font-size: 19px; }
+
+footer { background: var(--wash); border-top: 1px solid var(--rule); padding-block: 26px 40px; font-size: 16px; color: var(--ink-2); }
+footer p { margin-bottom: 10px; }
+
+@media (max-width: 720px) {
+  body { font-size: 17px; }
+  .plain, .grid3, .two { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; gap: 16px; }
+  section { padding-block: 34px; }
+  h2 { font-size: 25px; }
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="crumb"><a href="../">Carroll CS Research</a> · Patch Watch</div>
+    <h1>How fast do local government websites install security fixes?</h1>
+    <p class="lede">When a software maker publishes a security fix, it only protects a website once someone installs it. Patch Watch measures how long that takes for Wisconsin's town, county, school-district and state websites, from the outside, without touching anything.</p>
+    <span class="pill">Collecting data · no results yet</span>
+    <div class="cta">
+      <a href="https://carrolluniversitycs.github.io/patch-watch/">Live dashboard</a>
+      <a href="https://github.com/CarrollUniversityCS/patch-watch">Code and plan</a>
+      <a href="#optout">Opt out</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section>
+  <div class="wrap">
+    <h2>The short version</h2>
+    <div class="plain">
+      <div class="card">
+        <h3>The question</h3>
+        <p>After a serious security fix is published, how many days pass before government websites are protected, and which kinds of sites wait longest?</p>
+      </div>
+      <div class="card">
+        <h3>The method</h3>
+        <p>Once on each snapshot day we ask each site for its public front page, the same way a browser does, and read the software label the page sometimes shows. Then we count groups of sites.</p>
+      </div>
+      <div class="card">
+        <h3>Why it matters</h3>
+        <p>The time between "fix published" and "fix installed" is when a known weakness stays open. Knowing how long it lasts helps point help to the places that need it. Small public-sector sites are measured far less often than large companies.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>The window we measure</h2>
+    <p class="muted">A fix existing is not the same as a fix being installed. Every site sits somewhere in the gap between the two. Patch Watch measures how long that gap lasts across many sites.</p>
+    <figure class="figure">
+      <svg viewBox="0 0 720 210" role="img" aria-labelledby="win-t win-d">
+        <title id="win-t">The window between a fix being published and installed</title>
+        <desc id="win-d">A horizontal line with two markers: the fix is published on the left and installed on one site on the right. A bracket between them marks the window in which the weakness is public but the site is not yet protected.</desc>
+        <rect class="panel" x="0.5" y="0.5" width="719" height="209" rx="12"/>
+        <line class="stroke" x1="70" y1="120" x2="650" y2="120"/>
+        <circle class="dot" cx="110" cy="120" r="10"/>
+        <circle class="dot" cx="610" cy="120" r="10"/>
+        <text class="t" x="110" y="156" text-anchor="middle">Fix published</text>
+        <text class="t2" x="110" y="176" text-anchor="middle">anyone can read it</text>
+        <text class="t" x="610" y="156" text-anchor="middle">Fix installed</text>
+        <text class="t2" x="610" y="176" text-anchor="middle">on one particular site</text>
+        <path class="bracket" d="M110,92 L110,76 L610,76 L610,92"/>
+        <text class="tw" x="360" y="62" text-anchor="middle">The window: weakness is public, site not yet protected</text>
+        <text class="t2" x="360" y="108" text-anchor="middle">how long, for each kind of site?</text>
+      </svg>
+      <figcaption>A diagram of the idea, not a result. No measurements are drawn here.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>How one measurement works</h2>
+    <ol class="steps">
+      <li><strong>Start with a public list</strong>The official public list of .gov website names.</li>
+      <li><strong>Check the name exists</strong>An ordinary name lookup. It goes to name servers, never to the website.</li>
+      <li><strong>Ask once</strong>One ordinary request for the front page, from a tool that identifies itself as this study.</li>
+      <li><strong>Read the label</strong>Some pages announce their software version. We read only what the page chooses to show.</li>
+      <li><strong>Count groups</strong>Sites are sorted into classes and counted in groups. No site is named or ranked.</li>
+    </ol>
+    <p class="small" style="margin-top:18px">We never log in, never try exploits, never scan other doors, and never request any page except the front page. If HTTPS will not connect at all, we make one plain-HTTP attempt so we can tell "no site here" from "site refusing a secure connection".</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What we can and cannot see</h2>
+    <p class="muted">Seeing a version label is informative. Not seeing one proves nothing: the site may hide it, sit behind a protective service, or have been fixed without its label changing. That is why Patch Watch never counts "no label" as "patched".</p>
+    <figure class="figure">
+      <svg viewBox="0 0 720 260" role="img" aria-labelledby="see-t see-d">
+        <title id="see-t">A page that shows its version and a page that does not</title>
+        <desc id="see-d">Two browser windows. The left one shows a version label, so we can sort the site as fixed or not fixed. The right one shows no label, so we record it as hidden and never as patched.</desc>
+        <rect class="panel" x="0.5" y="0.5" width="719" height="259" rx="12"/>
+        <rect class="box" x="30" y="30" width="300" height="130" rx="8"/>
+        <line class="stroke" x1="30" y1="56" x2="330" y2="56" style="stroke-width:1.5"/>
+        <circle class="dot" cx="46" cy="43" r="4"/><circle class="dot" cx="60" cy="43" r="4"/><circle class="dot" cx="74" cy="43" r="4"/>
+        <rect class="box-ok" x="55" y="84" width="250" height="40" rx="6"/>
+        <text class="t" x="180" y="110" text-anchor="middle">Page announces its version</text>
+        <text class="big" x="180" y="198" text-anchor="middle" style="font-size:18px">We can read it</text>
+        <text class="t2" x="180" y="220" text-anchor="middle">sorted as fixed or not fixed</text>
+        <rect class="box" x="390" y="30" width="300" height="130" rx="8"/>
+        <line class="stroke" x1="390" y1="56" x2="690" y2="56" style="stroke-width:1.5"/>
+        <circle class="dot" cx="406" cy="43" r="4"/><circle class="dot" cx="420" cy="43" r="4"/><circle class="dot" cx="434" cy="43" r="4"/>
+        <rect class="box-warn" x="415" y="84" width="250" height="40" rx="6" style="stroke-dasharray:6 4"/>
+        <text class="t" x="540" y="110" text-anchor="middle">Page says nothing</text>
+        <text class="big" x="540" y="198" text-anchor="middle" style="font-size:18px">We cannot tell</text>
+        <text class="t2" x="540" y="220" text-anchor="middle">recorded as hidden, never as patched</text>
+      </svg>
+    </figure>
+    <div class="grid3">
+      <div class="tile"><h3>Hidden on purpose</h3><p>Many careful sites hide their version. Unknown, not safe or unsafe.</p></div>
+      <div class="tile"><h3>Fixed without a new label</h3><p>Some providers copy a fix into an older version. We call that "possibly fixed" and say why.</p></div>
+      <div class="tile"><h3>Refused or errored</h3><p>If a site refuses us or errors out, it is "not measured" and left out of every total.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Why you can trust the method</h2>
+    <div class="grid3">
+      <div class="tile"><h3>Plan written first</h3><p>The analysis was pre-registered and frozen on October 23, 2026, before any live data existed. Later changes are logged in dated amendments, not edited in.</p></div>
+      <div class="tile"><h3>Ethics checked</h3><p>On October 23, 2026 the chair of Carroll's Institutional Review Board confirmed that the work involves no human subjects and needs no IRB review.</p></div>
+      <div class="tile"><h3>Light touch</h3><p>One ordinary front-page request per site per snapshot day, a declared study user agent, strict rate limits, no cookies and no logins.</p></div>
+      <div class="tile"><h3>Safety stop</h3><p>The run halts on an abuse complaint or when sites start refusing or overloading, so a problem stops the study, not the site.</p></div>
+      <div class="tile"><h3>Groups, not names</h3><p>Results are aggregate. No site is named or ranked, and small counts are suppressed by rule.</p></div>
+      <div class="tile"><h3>Checkable</h3><p>The site list is pinned to one registry version, every request is written to a ledger, and the code has an automated test suite that runs on every update.</p></div>
+    </div>
+    <div class="optout" id="optout">
+      <strong>Opt out, no questions asked</strong>
+      <p>Email <a href="mailto:jforden@carrollu.edu">jforden@carrollu.edu</a> with your domain and it is removed within 24 hours, before we reply. Or block the <code>CarrollPHPStudy/1.0</code> user agent at your firewall. A site that refuses us is recorded as "not measured", never as "vulnerable". Full notice: <a href="https://github.com/JForden/JForden">github.com/JForden/JForden</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="two">
+      <div>
+        <h3>It can tell you</h3>
+        <ul>
+          <li>How quickly groups of sites moved to a fixed version after a fix was published.</li>
+          <li>Which kinds of sites, such as towns, counties or election offices, tend to be faster or slower.</li>
+          <li>How much of a slow response comes from one hosting provider's upgrade schedule.</li>
+          <li>How Wisconsin's response compares with neighbouring states and with a 2024 benchmark.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>It cannot tell you</h3>
+        <ul>
+          <li>Whether any one site is safe or unsafe. Results are never about a single site.</li>
+          <li>That a site with no visible version is patched.</li>
+          <li>A national estimate. Other states are added in waves and are not a representative sample.</li>
+          <li>Why a site updated or did not. The study observes timing, not reasons.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Timeline</h2>
+    <ul class="timeline">
+      <li><strong>October 21, 2026</strong>The PHP2Shell fix is published.</li>
+      <li><strong>October 23, 2026</strong>The analysis plan is frozen before any data is collected, and Carroll's IRB chair confirms no review is needed.</li>
+      <li><strong>October 24, 2026</strong>First Wisconsin snapshot.</li>
+      <li><strong>October 31, 2026</strong>The same single request is extended to other states in scheduled waves.</li>
+      <li><strong>November 19, 2026</strong>PHP publishes a second security release. A plan for measuring it, including a few extra snapshot days right after release, was frozen beforehand.</li>
+      <li class="now"><strong>Now</strong>Still collecting. No results are published yet; when they are, they will be aggregate-only and traced to the frozen plan.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Who is doing this, and where to look next</h2>
+    <p>Patch Watch is a research project by Jack Forden, Department of Computer Science, Carroll University, Waukesha, Wisconsin. Data stays local; only aggregate counts are published.</p>
+    <p><a href="https://carrolluniversitycs.github.io/patch-watch/">Live dashboard</a> · <a href="https://github.com/CarrollUniversityCS/patch-watch">Code, plan and documentation</a> · <a href="https://github.com/JForden/JForden">Public notice and opt-out</a> · <a href="mailto:jforden@carrollu.edu">Contact</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Project pages are research outputs of individual faculty and students, not official statements of Carroll University.</p>
+    <p><a href="../">Back to Carroll CS Research</a></p>
+  </div>
+</footer>
+</body>
+</html>
